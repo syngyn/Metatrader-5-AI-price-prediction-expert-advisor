@@ -1,7 +1,7 @@
 This version includes a simple install file. Copy all the files into a folder then run GGTHPredictorSetup_Simple.exe
 IMPORTANT - Do not forget to compile the EA in metaeditor.
-<strong>PLEASE NOTE</strong>
-Using the strategy tester requires you to use the Generate Backest predictions. Simply select that as an option in the menu and run it. It will create a csv of the epredictions it would have made in real time that the ea can use diuring backtesting.
+<p><strong>PLEASE NOTE</strong></p>
+<p>Using the strategy tester requires you to use the Generate Backest predictions. Simply select that as an option in the menu and run it. It will create a csv of the predictions it would have made in real time that the ea can use during backtesting.</p>
 <p>There is a problem when using Ai and the built in strategy tester. The ai will automatically start looking ahead one bar (cheating) for its predictions and this will create an extreamly accurate prediction in strategy tester 98%-100%.</p>
 <p> This means the only way you can use strategy tester and get an accurate result is to change these settings "use predictions as take profit" to false. Then change the setting for "take profit" to something like 20. Then change "min prediction distance to make trade" to the same as your TP</p>
 <p> changing the setting in strategy tester to this will keep the AI from cheating and avoid massive curve fitting</p>
