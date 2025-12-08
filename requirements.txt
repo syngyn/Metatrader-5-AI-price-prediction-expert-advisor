@@ -1,0 +1,29 @@
+# Core dependencies for GGTH Predictor
+# These versions are tested and compatible with each other
+
+# MetaTrader 5 integration
+MetaTrader5>=5.0.45
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0,<2.0.0
+
+# Machine Learning - TensorFlow and Keras
+tensorflow>=2.15.0,<2.16.0
+# Note: Do NOT install standalone keras - it comes with TensorFlow
+
+# Scikit-learn for preprocessing
+scikit-learn>=1.3.0
+
+# Gradient boosting
+lightgbm>=4.0.0
+
+# Hyperparameter tuning
+keras-tuner>=1.4.0
+
+# Timezone handling
+pytz>=2023.3
+
+# Optional but recommended
+colorama>=0.4.6  # For colored console output
+tqdm>=4.66.0     # For progress bars
