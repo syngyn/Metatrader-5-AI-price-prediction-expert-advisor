@@ -1,7 +1,8 @@
 """
 Hybrid Ensemble MT5 Predictor with Transformer & Gradient Boosting
-Author: Jason Rusk
-Version: 6.5.2 (Complete Fix + TensorFlow Optimization + Variable Fix)
+Author: Jason Rusk jason.w.rusk@gmail.com
+Copyright 2026
+Version: 6.5.2 
 
 Fixes in this version:
 - Fixed keras-tuner package installation name
@@ -9,12 +10,11 @@ Fixes in this version:
 - Fixed potential division by zero in ensemble weight updates
 - Added validation for data downloads
 - Improved Kalman filter initialization
-- Added missing type hints and documentation
 - Fixed potential timezone issues in datetime comparisons
 - Added better logging and error messages
 - Fixed potential NaN/Inf handling in predictions
 - Added validation for model loading
-- MAJOR: Fixed multi-timeframe prediction (now trains separate models per timeframe)
+- Fixed multi-timeframe prediction (now trains separate models per timeframe)
 - Each timeframe (1H, 4H, 1D) has its own ensemble of models
 - No more artificial scaling - genuine multi-timeframe predictions
 - OPTIMIZED: Fixed TensorFlow retracing warnings (2-3x faster predictions)
