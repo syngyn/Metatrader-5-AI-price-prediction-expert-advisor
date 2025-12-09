@@ -5,7 +5,7 @@ IMPORTANT - Do not forget to compile the EA in metaeditor.
 <p>There is a problem when using Ai and the built in strategy tester. The ai will automatically start looking ahead one bar (cheating) for its predictions and this will create an extreamly accurate prediction in strategy tester 98%-100%.</p>
 <p> This means the only way you can use strategy tester and get an accurate result is to change these settings "use predictions as take profit" to false. Then change the setting for "take profit" to something like 20. Then change "min prediction distance to make trade" to the same as your TP</p>
 <p> changing the setting in strategy tester to this will keep the AI from cheating and avoid massive curve fitting</p>
-<p> I also like the option of using the AI as a trade confimation and using a 2 to 3 profit ratio like setting minimum distance to 10 and take profit to 90 leaving the stop loss at 50. Play around with it and you will see the benefits of using ai porediction in real time.</p>
+<p> I also like the option of using the AI as a trade confimation and using a 2 to 3 profit ratio like setting minimum distance to 10 and take profit to 90 leaving the stop loss at 50. Play around with it and you will see the benefits of using ai prediction in real time.</p>
 
 <p><strong> Why am I doing this?</strong></p>
 <p> I've been trading a long time and I can tell you that none of the out of the box indicators in any combination is going to work for consistant profits</p>
