@@ -1,4 +1,5 @@
-This version includes a simple install file. Copy all the files into a folder then run GGTHPredictorSetup_Simple.exe
+<b>PYTHON VERSION 3.11 or 3.10 is REQUIRED!!</b>
+<p>This version includes a simple install file. Copy all the files into a folder then run GGTHPredictorSetup_Simple.exe</p>p>
 IMPORTANT - Do not forget to compile the EA in metaeditor.
 <p><strong>PLEASE NOTE</strong></p>
 
