@@ -1,6 +1,7 @@
 <b>PYTHON VERSION 3.11 or 3.10 is REQUIRED!!</b>
 <p>This version includes a simple install file. Copy all the files into a folder then run GGTHPredictorSetup_Simple.exe</p>
 <p>IMPORTANT - Do not forget to compile the EA in metaeditor.</p>
+<P>IMPORTANT - For the system to work in your Metatrader 5 console click Tools - Options - Community tab and login - This gives the system access to download the tick history for the currency pairs.</p>
 <p><strong>PLEASE NOTE</strong></p>
 To see the predictions in your chart you will need to switch strategy tester mode to false.</strongf>
 <p>Using the strategy tester requires you to first use the Generate Backest predictions option. Simply select that as an option in the menu and run it. It will create a csv of the predictions it would have made in real time that the ea can use during backtesting.</p>
