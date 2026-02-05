@@ -2,13 +2,13 @@
 setlocal enabledelayedexpansion
 
 REM ============================================
-REM GGTH Predictor - Quick Setup Wizard
+REM GGTH Predictor v2.0 - Quick Setup Wizard
 REM Helps configure MT5 path for first-time users
 REM ============================================
 
 echo.
 echo ================================================
-echo  GGTH Predictor - Quick Setup Wizard
+echo  GGTH Predictor v2.0 - Quick Setup Wizard
 echo ================================================
 echo.
 echo This wizard will help you configure your MT5 path.
@@ -31,8 +31,10 @@ if exist "config.json" (
 :show_current
 echo.
 echo Current configuration:
+echo ----------------------
 type config.json
 echo.
+echo ----------------------
 echo.
 echo You can also use the GUI to change the MT5 path.
 echo Click "Browse..." next to "MT5 Files:" and then "Save MT5 Path"
@@ -150,10 +152,12 @@ REM Create config.json
 (
 echo {
 echo   "mt5_files_path": "%JSON_PATH%",
-echo   "version": "1.2",
+echo   "version": "2.0",
 echo   "use_kalman": true,
 echo   "default_symbol": "USDJPY",
-echo   "prediction_interval_minutes": 60
+echo   "prediction_interval_minutes": 60,
+echo   "default_models": ["lstm", "transformer", "lgbm"],
+echo   "available_models": ["lstm", "gru", "transformer", "tcn", "lgbm"]
 echo }
 ) > config.json
 
@@ -168,7 +172,7 @@ if exist config.json (
     echo.
     echo You're all set! You can now:
     echo   1. Launch the GGTH Predictor GUI
-    echo   2. Train your models
+    echo   2. Train your models (LSTM, GRU, Transformer, TCN, LightGBM)
     echo   3. Start making predictions
     echo.
     echo You can change the MT5 path anytime through:

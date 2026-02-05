@@ -1,0 +1,468 @@
+# GGTH Predictor v8.1 - User Guide
+
+## Quick Start Guide for Forex Price Prediction with Machine Learning
+
+---
+
+## Table of Contents
+
+1. [Overview](#overview)
+2. [System Requirements](#system-requirements)
+3. [Installation](#installation)
+4. [First-Time Setup](#first-time-setup)
+5. [Using the GUI](#using-the-gui)
+6. [Training Models](#training-models)
+7. [Making Predictions](#making-predictions)
+8. [Understanding the Output](#understanding-the-output)
+9. [Using with MetaTrader 5 EA](#using-with-metatrader-5-ea)
+10. [Troubleshooting](#troubleshooting)
+11. [Tips for Best Results](#tips-for-best-results)
+
+---
+
+## Overview
+
+GGTH Predictor is a machine learning system that predicts forex price movements using an ensemble of AI models:
+
+| Model | Description | Strengths |
+|-------|-------------|-----------|
+| **LSTM** | Long Short-Term Memory neural network | Captures long-term patterns |
+| **GRU** | Gated Recurrent Unit | Faster than LSTM, similar accuracy |
+| **Transformer** | Attention-based model | Finds complex relationships |
+| **TCN** | Temporal Convolutional Network | Fast, parallel processing |
+| **LightGBM** | Gradient boosting trees | Robust, handles noise well |
+
+The system combines predictions from multiple models to produce more reliable forecasts.
+
+### What It Does
+
+- Downloads historical price data from MetaTrader 5
+- Trains AI models on your chosen currency pair
+- Generates price predictions for 1-hour, 4-hour, and 1-day timeframes
+- Outputs JSON files that can be read by MT5 Expert Advisors
+
+---
+
+## System Requirements
+
+### Minimum Requirements
+
+- **Operating System:** Windows 10 or 11
+- **RAM:** 8 GB (16 GB recommended for training)
+- **Storage:** 2 GB free space
+- **Python:** Version 3.9, 3.10, or 3.11
+- **MetaTrader 5:** Installed and logged into a broker account
+
+### Software Dependencies (Auto-Installed)
+
+- TensorFlow (deep learning)
+- LightGBM (gradient boosting)
+- Pandas & NumPy (data processing)
+- MetaTrader5 Python package
+
+---
+
+## Installation
+
+### Step 1: Install Python
+
+1. Download Python from [python.org/downloads](https://www.python.org/downloads/)
+2. **IMPORTANT:** Check the box ✅ "Add Python to PATH" during installation
+3. Complete the installation
+
+### Step 2: Install MetaTrader 5
+
+1. Download MT5 from your broker or [metatrader5.com](https://www.metatrader5.com/)
+2. Install and log into your account
+3. Make sure the currency pair you want to predict is visible in Market Watch
+
+### Step 3: Download GGTH Predictor
+
+Place all these files in a single folder (e.g., `C:\Users\YourName\Desktop\Forex Prediction\`):
+
+```
+📁 Forex Prediction/
+├── unified_predictor_v8.py    (Main prediction engine)
+├── ggth_gui.py                (Graphical interface)
+├── config_manager.py          (Configuration handler)
+├── requirements.txt           (Python dependencies)
+├── run_ggth_gui.bat          (Launcher script)
+└── setup_wizard.bat          (First-time setup)
+```
+
+---
+
+## First-Time Setup
+
+### Option A: Using the Setup Wizard (Recommended)
+
+1. Double-click `setup_wizard.bat`
+2. The wizard will automatically find your MT5 installation
+3. Confirm the detected path or enter it manually
+4. Click "Y" to launch the GUI
+
+### Option B: Manual Setup
+
+1. Open MetaTrader 5
+2. Click **File → Open Data Folder**
+3. Navigate to `MQL5\Files`
+4. Copy the full path from the address bar
+5. Run `run_ggth_gui.bat`
+6. Paste the path into "MT5 Files:" field
+7. Click "Save MT5 Path"
+
+### Finding Your MT5 Files Path
+
+The path typically looks like:
+```
+C:\Users\YourName\AppData\Roaming\MetaQuotes\Terminal\ABC123DEF456\MQL5\Files
+```
+
+The `ABC123DEF456` part is unique to your installation.
+
+---
+
+## Using the GUI
+
+### Launching the GUI
+
+Double-click `run_ggth_gui.bat`. On first run, it will:
+1. Create a virtual environment
+2. Install required packages (may take 5-10 minutes)
+3. Open the control panel
+
+### GUI Layout
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Python & Script Configuration                                │
+│   Python exe: [auto-detected]                               │
+│   Predictor:  [unified_predictor_v8.py]                     │
+│   MT5 Files:  [your MT5 path]                               │
+├─────────────────────────────────────────────────────────────┤
+│ Basic Settings              │ Prediction/Backtest Modes     │
+│   Symbol: [EURUSD]          │ ○ Predict ONCE               │
+│   ○ Train ALL (multi-TF)    │ ○ Predict CONTINUOUSLY       │
+│   ○ Train single            │ ○ Generate backtest          │
+│   ○ Hyperparameter tune     │ ○ Safe backtest              │
+├─────────────────────────────────────────────────────────────┤
+│ Training/Model Options      │ Prediction Options            │
+│   ☑ Force retrain           │ ☑ Use Kalman smoothing       │
+│   ☑ LSTM  ☐ GRU             │ Interval: [60] mins          │
+│   ☑ Transformer  ☐ TCN      │                              │
+│   ☑ LightGBM                │                              │
+├─────────────────────────────────────────────────────────────┤
+│ [▶ Run]  [Save MT5 Path]  [Clear Log]              [Exit]  │
+├─────────────────────────────────────────────────────────────┤
+│ Console Output                                               │
+│ ═══════════════════════════════════════════════════════════ │
+│ GGTH Predictor GUI v2.0                                     │
+│ Executing: python unified_predictor_v8.py train-multitf ... │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Training Models
+
+### Recommended First-Time Training
+
+1. **Symbol:** Enter your currency pair (e.g., `EURUSD`, `USDJPY`, `GBPUSD`)
+2. **Action:** Select "Train ALL models (multi-TF)" ✅
+3. **Models:** Keep defaults checked:
+   - ☑ LSTM
+   - ☑ Transformer
+   - ☑ LightGBM
+4. **Force retrain:** Check this ☑ for first-time training
+5. Click **▶ Run**
+
+### Training Time Estimates
+
+| Models Selected | Approximate Time |
+|-----------------|------------------|
+| LSTM + Transformer + LightGBM | 2-4 hours |
+| All 5 models | 4-6 hours |
+| Single model | 30-60 minutes |
+
+### What Happens During Training
+
+1. Downloads ~35,000 bars of historical data
+2. Creates technical indicators and features
+3. Selects the 25 most important features
+4. Trains each model on 1H, 4H, and 1D timeframes
+5. Saves models to your MT5 Files folder
+
+### Training Output
+
+You'll see progress like:
+```
+=== Training Ensemble for 1H Predictions ===
+--- Training LSTM for 1H (Instance 0) ---
+Epoch 1/150 - loss: 0.0234 - val_loss: 0.0198
+Epoch 2/150 - loss: 0.0189 - val_loss: 0.0175
+...
+Saved: model_EURUSD_lstm_0_1H.keras
+```
+
+---
+
+## Making Predictions
+
+### One-Time Prediction
+
+1. Select "Predict ONCE for EA (multi-TF JSON)"
+2. Click **▶ Run**
+3. Predictions are saved to your MT5 Files folder
+
+### Continuous Predictions
+
+1. Select "Predict CONTINUOUSLY (multi-TF JSON)"
+2. Set interval (default: 60 minutes)
+3. Click **▶ Run**
+4. The predictor runs in a loop, updating every hour
+5. Close the window or press Ctrl+C to stop
+
+### Prediction Options
+
+| Option | Description |
+|--------|-------------|
+| **Kalman Smoothing** | Reduces prediction noise over time. Recommended: ON |
+| **Interval** | Minutes between predictions in continuous mode |
+
+---
+
+## Understanding the Output
+
+### Output Files Location
+
+All files are saved to your MT5 Files folder:
+```
+📁 MQL5/Files/
+├── predictions_EURUSD.json     (Current predictions)
+├── lstm_status_EURUSD.json     (System status)
+├── model_EURUSD_lstm_0_1H.keras
+├── model_EURUSD_transformer_0_1H.keras
+├── model_EURUSD_lgbm_0_1H.pkl
+└── ... (more model files)
+```
+
+### predictions_EURUSD.json
+
+```json
+{
+    "1H": {
+        "prediction": 1.08234,
+        "change_pct": 0.045,
+        "ensemble_std": 0.00012
+    },
+    "4H": {
+        "prediction": 1.08301,
+        "change_pct": 0.107,
+        "ensemble_std": 0.00025
+    },
+    "1D": {
+        "prediction": 1.08456,
+        "change_pct": 0.251,
+        "ensemble_std": 0.00045
+    }
+}
+```
+
+| Field | Meaning |
+|-------|---------|
+| `prediction` | Predicted price |
+| `change_pct` | Expected % change from current price |
+| `ensemble_std` | Uncertainty (lower = more confident) |
+
+### lstm_status_EURUSD.json
+
+```json
+{
+    "last_update": "2026-02-04T15:30:00",
+    "status": "online",
+    "symbol": "EURUSD",
+    "current_price": 1.08189,
+    "trade_allowed": true,
+    "market_context": {
+        "veto_active": false,
+        "reasons": []
+    }
+}
+```
+
+| Field | Meaning |
+|-------|---------|
+| `last_update` | When predictions were generated |
+| `status` | "online" = system working |
+| `current_price` | Price at prediction time |
+| `trade_allowed` | false if market conditions are risky |
+| `veto_active` | true if macro indicators suggest caution |
+
+---
+
+## Using with MetaTrader 5 EA
+
+### Reading Predictions in MQL5
+
+```mql5
+#include <Files\File.mqh>
+
+struct Prediction {
+    double price;
+    double change_pct;
+    double uncertainty;
+};
+
+bool ReadPredictions(string symbol, Prediction &h1, Prediction &h4, Prediction &d1) {
+    string filename = "predictions_" + symbol + ".json";
+    
+    int handle = FileOpen(filename, FILE_READ|FILE_TXT|FILE_ANSI);
+    if(handle == INVALID_HANDLE) return false;
+    
+    string content = FileReadString(handle);
+    FileClose(handle);
+    
+    // Parse JSON (simplified - use a JSON library for production)
+    // Extract h1.price, h4.price, d1.price from content
+    
+    return true;
+}
+```
+
+### Simple EA Integration Example
+
+```mql5
+void OnTick() {
+    Prediction h1, h4, d1;
+    
+    if(!ReadPredictions(_Symbol, h1, h4, d1)) {
+        Print("Failed to read predictions");
+        return;
+    }
+    
+    double currentPrice = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+    
+    // Buy if all timeframes predict UP
+    if(h1.price > currentPrice && h4.price > currentPrice && d1.price > currentPrice) {
+        // Open buy order
+    }
+    
+    // Sell if all timeframes predict DOWN
+    if(h1.price < currentPrice && h4.price < currentPrice && d1.price < currentPrice) {
+        // Open sell order
+    }
+}
+```
+
+---
+
+## Troubleshooting
+
+### Common Errors and Solutions
+
+#### "Python Not Found"
+- Reinstall Python with "Add Python to PATH" checked
+- Restart your computer after installation
+
+#### "MT5 Files path is not configured"
+- Run `setup_wizard.bat`
+- Or manually set the path in the GUI and click "Save MT5 Path"
+
+#### "Failed to download data for EURUSD"
+- Make sure MT5 is running and logged in
+- Add the symbol to Market Watch (right-click → Show All)
+- Check your internet connection
+
+#### "Macro data unavailable for DXY, SPX"
+- This is normal - your broker may not offer these indices
+- Predictions will still work, just without intermarket analysis
+
+#### "Error loading model: TransformerBlock"
+- Your models were trained with an older version
+- Retrain with "Force retrain" checked
+
+#### "CUDA/GPU errors"
+- The system uses CPU by default
+- GPU errors can be ignored - training just uses CPU
+
+### Log File
+
+Check the console output in the GUI for detailed error messages.
+
+---
+
+## Tips for Best Results
+
+### Model Selection
+
+| Scenario | Recommended Models |
+|----------|-------------------|
+| **Best accuracy** | LSTM + Transformer + LightGBM |
+| **Faster training** | LSTM + LightGBM |
+| **Maximum diversity** | All 5 models |
+
+### Training Tips
+
+1. **Train during off-hours** - Training is CPU-intensive
+2. **Use multi-TF training** - Creates separate models for each timeframe
+3. **Retrain monthly** - Market conditions change over time
+4. **Start with majors** - EURUSD, USDJPY, GBPUSD have the most data
+
+### Prediction Tips
+
+1. **Use Kalman smoothing** - Reduces noise in predictions
+2. **Check uncertainty** - Lower `ensemble_std` = higher confidence
+3. **Respect the veto** - Don't trade when `trade_allowed` is false
+4. **Combine timeframes** - Trade only when multiple timeframes agree
+
+### Risk Management
+
+⚠️ **IMPORTANT:** This is a prediction tool, not a guaranteed profit system.
+
+- Always use stop losses
+- Never risk more than 1-2% per trade
+- Backtest before live trading
+- Past performance doesn't guarantee future results
+
+---
+
+## Command Line Reference
+
+For advanced users, you can run the predictor directly:
+
+```bash
+# Train multi-timeframe models (recommended)
+python unified_predictor_v8.py train-multitf --symbol EURUSD --models lstm transformer lgbm --force
+
+# Train single-timeframe models
+python unified_predictor_v8.py train --symbol EURUSD --models lstm transformer lgbm
+
+# Hyperparameter tuning
+python unified_predictor_v8.py tune --symbol EURUSD
+
+# One-time prediction
+python unified_predictor_v8.py predict-multitf --symbol EURUSD
+
+# Continuous predictions (every 60 minutes)
+python unified_predictor_v8.py predict-multitf --symbol EURUSD --continuous --interval 60
+
+# Generate backtest data
+python unified_predictor_v8.py backtest --symbol EURUSD
+```
+
+### Available Options
+
+| Option | Description |
+|--------|-------------|
+| `--symbol` | Currency pair (default: EURUSD) |
+| `--models` | Models to use: lstm, gru, transformer, tcn, lgbm |
+| `--force` | Force retrain even if models exist |
+| `--continuous` | Run predictions in a loop |
+| `--interval` | Minutes between predictions |
+| `--no-kalman` | Disable Kalman smoothing |
+
+---
+
+
+
+*GGTH Predictor - Machine Learning for Forex Trading*

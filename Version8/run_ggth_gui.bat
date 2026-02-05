@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 REM ============================================
-REM GGTH Predictor - Smart Launcher
+REM GGTH Predictor v2.0 - Smart Launcher
 REM Handles Python detection and setup
 REM ============================================
 
@@ -10,9 +10,10 @@ REM Change to script directory
 cd /d "%~dp0"
 
 echo.
-echo ============================================
-echo  GGTH Predictor - Starting Up...
-echo ============================================
+echo ================================================
+echo  GGTH Predictor v2.0 - Starting Up...
+echo  (unified_predictor_v8.py)
+echo ================================================
 echo.
 
 REM --- Step 1: Check for Python ---
@@ -21,9 +22,9 @@ echo [1/4] Checking for Python installation...
 where python >nul 2>&1
 if %errorlevel% neq 0 (
     echo.
-    echo ============================================
+    echo ================================================
     echo  ERROR: Python Not Found!
-    echo ============================================
+    echo ================================================
     echo.
     echo Python is required but not installed or not in PATH.
     echo.
@@ -90,17 +91,15 @@ REM Install requirements
 pip install -r requirements.txt --quiet
 if %errorlevel% neq 0 (
     echo.
-    echo ERROR: Failed to install required packages.
-    echo Check your internet connection and try again.
+    echo WARNING: Some packages may have failed to install.
+    echo Attempting to continue...
     echo.
-    pause
-    exit /b 1
 )
 
 echo.
-echo ============================================
+echo ================================================
 echo  Setup Complete! Launching GUI...
-echo ============================================
+echo ================================================
 echo.
 
 REM --- Launch GUI ---
@@ -109,9 +108,12 @@ python ggth_gui.py
 REM If GUI exits with error, pause so user can see the error
 if %errorlevel% neq 0 (
     echo.
-    echo ============================================
+    echo ================================================
     echo  GUI Exited with Error Code: %errorlevel%
-    echo ============================================
+    echo ================================================
+    echo.
+    echo If you see import errors, try running:
+    echo    pip install -r requirements.txt
     echo.
     pause
 )

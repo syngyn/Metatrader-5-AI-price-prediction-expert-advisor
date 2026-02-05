@@ -1,0 +1,9 @@
+{
+  "mt5_files_path": "C:\\Users\\jason\\AppData\\Roaming\\MetaQuotes\\Terminal\\5C659F0E64BA794E712EE4C936BCFED5\\MQL5\\Files",
+  "version": "2.0",
+  "use_kalman": true,
+  "default_symbol": "USDJPY",
+  "prediction_interval_minutes": 60,
+  "default_models": ["lstm", "transformer", "lgbm"],
+  "available_models": ["lstm", "gru", "transformer", "tcn", "lgbm"]
+}
