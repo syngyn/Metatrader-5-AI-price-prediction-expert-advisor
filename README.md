@@ -1,5 +1,5 @@
 <b>PYTHON VERSION 3.11 or 3.10 is REQUIRED!!</b>
-<p>This version includes a simple install file. Copy all the files into a folder then run GGTHPredictorSetup_Simple.exe</p>
+<p>This version includes a simple install file. Copy all the files into a folder then run GGTHPredictorSetup_Simple.exe If your system blocks the installation or fails to install simply double click run_ggth_gui.bat</p>
 <p>IMPORTANT - Do not forget to compile the EA in metaeditor.</p>
 <strong><P>IMPORTANT - For the system to work you must be logged into your Metatrader 5 console click Tools - Options - Community tab and then login - This gives the system access to download the tick history for the currency pairs.</p></strong>
 <p><strong>PLEASE NOTE</strong></p>
