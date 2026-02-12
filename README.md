@@ -1,3 +1,7 @@
+This version is fully functional but I have a better version that has been fully backtested and doesnt open trades longer than 1 Hour. Feel free to use this code but I recommend you try this one instead - GGTH1Hour
+
+
+
 <b>PYTHON VERSION 3.11 or 3.10 is REQUIRED!!</b>
 <p>This version includes a simple install file. Copy all the files into a folder then run GGTHPredictorSetup_Simple.exe If your system blocks the installation or fails to install simply double click run_ggth_gui.bat</p>
 <p>IMPORTANT - Do not forget to compile the EA in metaeditor.</p>
